@@ -4,84 +4,26 @@ var U=require('../models/usuario');
 
 router.get('/:id?',function(req,res,next){
   if(req.params.id){
-    // U.getUsuarioById(req.params.id,function(err,rows){
-    //   if(err)
-    //   {
-    //       res.json(err);
-    //   }
-    //   else{
-    //       res.json(rows);
-    //   }
-    // });
+    U.getUsuarioById(req, res);
   }
   else{
-    console.log("Hola");
-    res.json("Hola");
-   // U.getAllUsuarios(function(err,rows){
-   //    if(err)
-   //    {
-   //        console.log(err);
-   //        res.json(err);
-   //    }
-   //    else
-   //    {
-   //        res.json(rows);
-   //    }
-   //  });
+    U.getAllUsuarios(req,res);
   }
 });
 
 router.post('/auth',function(req,res,next){
-  // U.searchUsuario(req.body,function(err,rows){
-  //     if(err)
-  //     {
-  //       res.json(err);
-  //     }
-  //     else{
-  //       console.log(rows);
-  //       res.json(rows);
-  //     }
-  // });
+  U.checkUsuario(req,res);
 });
 
 router.post('/',function(req,res,next){
-  // U.addUsuario(req.body,function(err,count){
-  //     if(err)
-  //     {
-  //       res.json(err);
-  //     }
-  //     else{
-  //       res.json(req.body);//or return count for 1 & 0
-  //     }
-  // });
+  U.addUsuario(req, res);
 });
 
 router.delete('/:id',function(req,res,next){
-  // U.deleteUsuario(req.params.id,function(err,count){
-  //
-  //     if(err)
-  //     {
-  //         res.json(err);
-  //     }
-  //     else
-  //     {
-  //         res.json(count);
-  //     }
-  //
-  // });
+  U.deleteUsuario(req,res);
 });
 router.put('/:id',function(req,res,next){
-  // U.updateUsuario(req.params.id,req.body,function(err,rows){
-  //
-  //     if(err)
-  //     {
-  //         res.json(err);
-  //     }
-  //     else
-  //     {
-  //         res.json(rows);
-  //     }
-  // });
+  U.updateUsuario(req, res);
 });
 
 module.exports=router;
