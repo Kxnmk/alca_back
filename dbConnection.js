@@ -5,6 +5,7 @@ var config = {
     password: 'wrzrj1lgme',
     server: 'db-Jlca.mssql.somee.com',
     database: 'db-Jlca',
+    multipleStatements: true,
     pool: {
         max: 10,
         min: 0,
