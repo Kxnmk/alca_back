@@ -6,14 +6,12 @@ const tableN = "[dbo]";
 var usuario={
   getAllUsuarios:function(req, res){
     console.log('AllUsuarios');
-    var query = 'SELECT * FROM dbo.Usuarios INNER JOIN dbo.Comisiones ON dbo.Usuarios.usrClave = dbo.Comisiones.ComClaveUsuario INNER JOIN dbo.Roles ON dbo.Roles.RolClave = dbo.Comisiones.ComClaveRol';
+    var query = 'EXEC userData';
     executeQuery(res, query);
   },
   checkUsuario:function(req, res){
     console.log('CheckUsuario');
     var query = "EXEC uspLogin @user = "+req.body.usrName+", @pass ="+req.body.usrPassword
-
-    //var query = "SELECT dbo.Usuarios.usrClave, dbo.Usuarios.usrNombre, dbo.Usuarios.usrRandom, dbo.Roles.RolNombre FROM dbo.Usuarios INNER JOIN dbo.Comisiones ON dbo.Usuarios.usrClave = dbo.Comisiones.ComClaveUsuario INNER JOIN dbo.Roles ON dbo.Roles.RolClave = dbo.Comisiones.ComClaveRol WHERE usrName = '"+req.body.usrName+"' and usrPassword = '"+req.body.usrPassword+"'";
     executeQuery(res, query);
   },
   getUsuarioById:function(req, res){
