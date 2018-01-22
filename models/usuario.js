@@ -1,4 +1,4 @@
-var config = require('../dbconnection');
+
 var sql=require('mssql');
 
 const tableN = "[dbo]";
