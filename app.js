@@ -9,7 +9,6 @@ var index = require('./routes/index');
 
 var usuarios = require('./routes/usuarios');
 
-var config = require('./config/dbConnection')
 
 var app = express();
 

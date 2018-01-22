@@ -1,4 +1,15 @@
-
+var config = {
+  user: 'Kxnmk_SQLLogin_1',
+  password: 'wrzrj1lgme',
+  server: 'db-Jlca.mssql.somee.com',
+  database: 'db-Jlca',
+  multipleStatements: true,
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000
+  }
+};
 var sql=require('mssql');
 
 const tableN = "[dbo]";
