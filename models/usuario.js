@@ -12,7 +12,7 @@ var config = {
 };
 var sql=require('mssql');
 
-const tableN = "[dbo]";
+const tableN = "[dbo].[Usuarios]";
 
 var usuario={
   getAllUsuarios:function(req, res){
@@ -48,11 +48,7 @@ var usuario={
     var query = "update "+tableN+" set usrNombre='"+u.usrNombre+"',usrName='"+u.usrName+"',usrPassword='"+u.usrPassword+"', usrRandom='"+u.usrRandom+"', usrRol='"+u.usrRol+"' where usrClave = "+req.params.id;
     executeQuery(res, query);
   },
-  getRoles:function(req, res){
-    console.log('getRoles');
-    var query = "select * from Roles";
-    executeQuery(res, query);
-  }
+
 }
 
 var executeQuery = function(res, query){
