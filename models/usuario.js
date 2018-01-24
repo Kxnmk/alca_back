@@ -50,7 +50,7 @@ var usuario={
   },
   getRoles:function(req, res){
     console.log('getRoles');
-    var query = "select * from [dbo].[Roles]";
+    var query = "select * from Roles";
     executeQuery(res, query);
   }
 }
