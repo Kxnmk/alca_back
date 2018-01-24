@@ -47,6 +47,11 @@ var usuario={
     console.log(req.body);
     var query = "update "+tableN+" set usrNombre='"+u.usrNombre+"',usrName='"+u.usrName+"',usrPassword='"+u.usrPassword+"', usrRandom='"+u.usrRandom+"', usrRol='"+u.usrRol+"' where usrClave = "+req.params.id;
     executeQuery(res, query);
+  },
+  getRoles:function(req, res){
+    console.log('getRoles');
+    var query = "select * from [dbo].[Roles]";
+    executeQuery(res, query);
   }
 }
 

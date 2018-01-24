@@ -25,5 +25,8 @@ router.delete('/:id',function(req,res,next){
 router.put('/:id',function(req,res,next){
   U.updateUsuario(req, res);
 });
+router.get('/roles', function(req,res,next){
+  U.getRoles(req, res);
+})
 
 module.exports=router;
