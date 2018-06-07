@@ -24,7 +24,7 @@ var actor={
       console.log('ActorById');
       var query = 'select * from '+tableN+' where ActClave = '+req.params.id;
     },
-    addActor:function(){
+    addActor:function(req, res){
       console.log('AddActor');
       let u = req.body;
       var query = "insert into "+tableN+" values("+u.ActClave+",'"+u.ActNombre+"','"+u.ActDomicilio+"','"+u.ActNota+"','"+u.ActTelefono+"','"+u.ActCorreo+"','"+u.ActClaveRepresentanteAct+"')";
