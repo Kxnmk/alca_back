@@ -28,11 +28,13 @@ var actor={
       console.log('AddActor');
       let u = req.body;
       var query = "insert into "+tableN+" values("+u.ActClave+",'"+u.ActNombre+"','"+u.ActDomicilio+"','"+u.ActNota+"','"+u.ActTelefono+"','"+u.ActCorreo+"','"+u.ActClaveRepresentanteAct+"')";
+      console.log(query);
       executeQuery(res, query);
     },
     deleteActor:function(req, res){
       console.log('DeleteActor');
       var query = 'delete from '+tableN+' where ActClave = '+req.params.id;
+      console.log(query);
       executeQuery(res, query);
     },
     updateActor:function(req, res){
@@ -40,6 +42,7 @@ var actor={
         let u = req.body;
         console.log(req.body);
         var query = "update "+tableN+" set ActNombre='"+u.ActNombre+"',ActDomicilio='"+u.ActDomicilio+"',ActNota='"+u.ActNota+"', ActTelefono='"+u.ActTelefono+"', ActCorreo='"+u.ActCorreo+"', ActClaveRepresentanteAct='"+u.ActClaveRepresentanteAct+"' where ActClave = "+req.params.id;
+        console.log(query);
         executeQuery(res, query);
       },
 }
