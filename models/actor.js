@@ -27,6 +27,7 @@ var actor={
     addActor:function(req, res){
       console.log('AddActor');
       let u = req.body;
+      console.log(u);
       var query = "insert into "+tableN+" values("+u.ActClave+",'"+u.ActNombre+"','"+u.ActDomicilio+"','"+u.ActNota+"','"+u.ActTelefono+"','"+u.ActCorreo+"','"+u.ActClaveRepresentanteAct+"')";
       console.log(query);
       executeQuery(res, query);
