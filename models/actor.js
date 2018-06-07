@@ -59,4 +59,4 @@ var executeQuery = function(res, query){
     sql.close();
   });
 }
-module.exports=usuario;
+module.exports=actor;
