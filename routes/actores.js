@@ -1,29 +1,26 @@
 var express = require('express');
 var router = express.Router();
-var U=require('../models/usuario');
+
+var A=require('../models/actor');
 
 router.get('/:id?',function(req,res,next){
   if(req.params.id){
-    U.getUsuarioById(req, res);
+    A.getActorById(req, res);
   }
   else{
-    U.getAllUsuarios(req,res);
+    A.getAllActores(req, res);
   }
-});
-
-router.post('/auth',function(req,res,next){
-  U.checkUsuario(req,res);
 });
 
 router.post('/',function(req,res,next){
-  U.addUsuario(req, res);
+  A.addActor(req, res);
 });
 
 router.delete('/:id',function(req,res,next){
-  U.deleteUsuario(req,res);
+  A.deleteActor(req,res);
 });
 router.put('/:id',function(req,res,next){
-  U.updateUsuario(req, res);
+  A.updateActor(req, res);
 });
 
 
