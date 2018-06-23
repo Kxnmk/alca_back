@@ -10,6 +10,7 @@ var index = require('./routes/index');
 var usuarios = require('./routes/usuarios');
 var roles = require('./routes/roles');
 var actores = require('./routes/actores');
+var mesas = require('./routes/mesas');
 
 
 var app = express();
@@ -38,6 +39,7 @@ app.use(function(req, res, next) {
 app.use('/api/usuarios',usuarios);
 app.use('/api/roles',roles);
 app.use('/api/actores',actores);
+app.use('/api/mesas',mesas);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

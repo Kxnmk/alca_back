@@ -23,6 +23,7 @@ var actor={
     getActorById:function(req, res){
       console.log('ActorById');
       var query = 'select * from '+tableN+' where ActClave = '+req.params.id;
+      executeQuery(res, query);
     },
     addActor:function(req, res){
       console.log('AddActor');
