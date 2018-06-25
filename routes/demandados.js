@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var A=require('../models/demanda');
+var A=require('../models/demandado');
 
 router.get('/:id?',function(req,res,next){
   if(req.params.id){

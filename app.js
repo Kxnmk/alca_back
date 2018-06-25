@@ -14,6 +14,7 @@ var mesas = require('./routes/mesas');
 var audiencias = require('./routes/audiencias');
 var demandas = require('./routes/demandas');
 var comisiones = require('./routes/comisiones');
+var demandados = require('./routes/demandados');
 
 
 var app = express();
@@ -46,6 +47,7 @@ app.use('/api/mesas',mesas);
 app.use('/api/audiencias', audiencias);
 app.use('/api/demandas', demandas);
 app.use('/api/comisiones', comisiones);
+app.use('/api/demandados', demandados);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var A=require('../models/audiencia');
+var A=require('../models/comision');
 
 router.get('/:id?',function(req,res,next){
   if(req.params.id){

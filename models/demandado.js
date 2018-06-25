@@ -12,38 +12,38 @@ var config = {
 };
 var sql=require('mssql');
 
-const tableN = "[dbo].[Demandas]";
+const tableN = "[dbo].[Demandados]";
 
-var demanda={
+var demandado={
   getAllDemandas:function(req, res){
-      console.log('AllDemandas');
+      console.log('AllDemandados');
       var query = 'select * from '+tableN;
       executeQuery(res, query);
     },
     getDemandaById:function(req, res){
-      console.log('DemandaById');
-      var query = 'select * from '+tableN+' where DemClave = '+req.params.id;
+      console.log('DemandadoById');
+      var query = 'select * from '+tableN+' where DeoClave = '+req.params.id;
       executeQuery(res, query);
     },
     addDemanda:function(req, res){
-      console.log('AddDemanda');
+      console.log('AddDemandado');
       let d = req.body;
       console.log(u);
-      var query = "insert into "+tableN+" values("+d.DemClave+",'"+d.DemFolio+"','"+d.DemClaveActor+"','"+d.DemClaveDemandado+"','"+d.DemCiudad+"','"+d.DemFecha+"','"+d.DemTipo+"')";
+      var query = "insert into "+tableN+" values("+d.DeoClave+",'"+d.DeoNombre+"','"+d.DeoDomicilio+"','"+d.DeoTelefono+"','"+d.DeoCorreo+"','"+d.DeoNombreRepresentantes+"','"+d.DeoMoral+"')";
       console.log(query);
       executeQuery(res, query);
     },
     deleteDemanda:function(req, res){
-      console.log('DeleteDemanda');
-      var query = 'delete from '+tableN+' where DemClave = '+req.params.id;
+      console.log('DeleteDemandado');
+      var query = 'delete from '+tableN+' where DeoClave = '+req.params.id;
       console.log(query);
       executeQuery(res, query);
     },
     updateDemanda:function(req, res){
-        console.log('UpdateDemanda');
+        console.log('UpdateDemandado');
         let d = req.body;
         console.log(req.body);
-        var query = "update "+tableN+" set DemFolio='"+d.DemFolio+"',DemClaveActor='"+d.DemClaveActor+"',DemClaveDemandado='"+d.DemClaveDemandado+"', DemCiudad='"+d.DemCiudad+"', DemFecha='"+d.DemFecha+"', DemFecha='"+d.DemFecha+"' where ActClave = "+req.params.id;
+        var query = "update "+tableN+" set DeoNombre='"+d.DeoNombre+"',DeoDomicilio='"+d.DeoDomicilio+"',DeoTelefono='"+d.DeoTelefono+"', DeoCorreo='"+d.DeoCorreo+"', DeoNombreRepresentantes='"+d.DeoNombreRepresentantes+"', DeoMoral='"+d.DeoMoral+"' where DeoClave = "+req.params.id;
         console.log(query);
         executeQuery(res, query);
       },
@@ -64,4 +64,4 @@ var executeQuery = function(res, query){
     sql.close();
   });
 }
-module.exports=demanda;
+module.exports=demandado;
