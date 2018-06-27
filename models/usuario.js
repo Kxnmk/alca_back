@@ -33,7 +33,7 @@ var usuario={
   addUsuario:function(req, res){
     console.log('AddUsuario');
     let u = req.body;
-    var query = "insert into "+tableN+" values("+u.usrClave+",'"+u.usrNombre+"','"+u.usrName+"','"+u.usrPassword+"','"+u.usrRandom+"','"+u.usrRol+"')";
+    var query = "insert into "+tableN+" values("+u.usrClave+",'"+u.usrNombre+"','"+u.usrName+"','"+u.usrPassword+"', "+Math.round(Math.random()*100)+"); EXEC uspNuevaComision @usrClave = "+u.usrClave+", @comClaveRol = "+u.usrRol;
     executeQuery(res, query);
   },
   deleteUsuario:function(req,res){
@@ -45,7 +45,7 @@ var usuario={
     console.log('updateUsuario');
     let u = req.body;
     console.log(req.body);
-    var query = "update "+tableN+" set usrNombre='"+u.usrNombre+"',usrName='"+u.usrName+"',usrPassword='"+u.usrPassword+"', usrRandom='"+u.usrRandom+"', usrRol='"+u.usrRol+"' where usrClave = "+req.params.id;
+    var query = "update "+tableN+" set usrNombre='"+u.usrNombre+"',usrName='"+u.usrName+"',usrPassword='"+u.usrPassword+"' where usrClave = "+req.params.id;
     executeQuery(res, query);
   },
 
@@ -57,8 +57,12 @@ var executeQuery = function(res, query){
   new sql.ConnectionPool(config).connect().then(pool => {
   return pool.request().query(query)
   }).then(result => {
-    let rows = result.recordset
-    res.status(200).json(rows);
+    if(result.recordset === undefined){
+      res.status(200).send({message: "Success"})
+    }else{
+      let rows = result.recordset
+      res.status(200).json(rows);
+    }
     sql.close();
   }).catch(err => {
     res.status(500).send({ message: ""+err})

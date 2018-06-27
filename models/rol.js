@@ -29,8 +29,12 @@ var executeQuery = function (res, query) {
     new sql.ConnectionPool(config).connect().then(pool => {
         return pool.request().query(query)
     }).then(result => {
+      if(result.recordset === undefined){
+        res.status(200).send({message: "Success"})
+      }else{
         let rows = result.recordset
         res.status(200).json(rows);
+      }
         sql.close();
     }).catch(err => {
         res.status(500).send({ message: "" + err })

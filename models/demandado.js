@@ -28,7 +28,7 @@ var demandado={
     addDemanda:function(req, res){
       console.log('AddDemandado');
       let d = req.body;
-      console.log(u);
+      console.log(d);
       var query = "insert into "+tableN+" values("+d.DeoClave+",'"+d.DeoNombre+"','"+d.DeoDomicilio+"','"+d.DeoTelefono+"','"+d.DeoCorreo+"','"+d.DeoNombreRepresentantes+"','"+d.DeoMoral+"')";
       console.log(query);
       executeQuery(res, query);
@@ -56,8 +56,12 @@ var executeQuery = function(res, query){
   new sql.ConnectionPool(config).connect().then(pool => {
   return pool.request().query(query)
   }).then(result => {
-    let rows = result.recordset
-    res.status(200).json(rows);
+    if(result.recordset === undefined){
+      res.status(200).send({message: "Success"})
+    }else{
+      let rows = result.recordset
+      res.status(200).json(rows);
+    }
     sql.close();
   }).catch(err => {
     res.status(500).send({ message: ""+err})

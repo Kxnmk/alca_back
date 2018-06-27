@@ -23,6 +23,7 @@ router.delete('/:id',function(req,res,next){
   U.deleteUsuario(req,res);
 });
 router.put('/:id',function(req,res,next){
+  console.log('Update Usuario');
   U.updateUsuario(req, res);
 });
 

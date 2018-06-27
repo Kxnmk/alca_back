@@ -28,7 +28,6 @@ var actor={
     addActor:function(req, res){
       console.log('AddActor');
       let u = req.body;
-      console.log(u);
       var query = "insert into "+tableN+" values("+u.ActClave+",'"+u.ActNombre+"','"+u.ActDomicilio+"','"+u.ActNota+"','"+u.ActTelefono+"','"+u.ActCorreo+"','"+u.ActClaveRepresentanteAct+"')";
       console.log(query);
       executeQuery(res, query);
@@ -42,9 +41,8 @@ var actor={
     updateActor:function(req, res){
         console.log('UpdateActor');
         let u = req.body;
-        console.log(req.body);
+
         var query = "update "+tableN+" set ActNombre='"+u.ActNombre+"',ActDomicilio='"+u.ActDomicilio+"',ActNota='"+u.ActNota+"', ActTelefono='"+u.ActTelefono+"', ActCorreo='"+u.ActCorreo+"', ActClaveRepresentanteAct='"+u.ActClaveRepresentanteAct+"' where ActClave = "+req.params.id;
-        console.log(query);
         executeQuery(res, query);
       },
 }
@@ -56,8 +54,13 @@ var executeQuery = function(res, query){
   new sql.ConnectionPool(config).connect().then(pool => {
   return pool.request().query(query)
   }).then(result => {
-    let rows = result.recordset
-    res.status(200).json(rows);
+    if(result.recordset === undefined){
+      res.status(200).send({message: "Success"})
+    }else{
+      let rows = result.recordset
+      res.status(200).json(rows);
+    }
+
     sql.close();
   }).catch(err => {
     res.status(500).send({ message: ""+err})

@@ -15,6 +15,7 @@ var audiencias = require('./routes/audiencias');
 var demandas = require('./routes/demandas');
 var comisiones = require('./routes/comisiones');
 var demandados = require('./routes/demandados');
+var statusR = require('./routes/StatusRoles');
 
 
 var app = express();
@@ -35,7 +36,8 @@ app.use('/', index);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
   next();
 });
 
@@ -48,6 +50,7 @@ app.use('/api/audiencias', audiencias);
 app.use('/api/demandas', demandas);
 app.use('/api/comisiones', comisiones);
 app.use('/api/demandados', demandados);
+app.use('/api/statusRol', statusR);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
