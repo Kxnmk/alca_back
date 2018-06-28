@@ -33,7 +33,7 @@ var usuario={
   addUsuario:function(req, res){
     console.log('AddUsuario');
     let u = req.body;
-    var query = "insert into "+tableN+" values("+u.usrClave+",'"+u.usrNombre+"','"+u.usrName+"','"+u.usrPassword+"', "+Math.round(Math.random()*100)+"); EXEC uspNuevaComision @usrClave = "+u.usrClave+", @comClaveRol = "+u.usrRol;
+    var query = "EXEC uspCrearUsuario @usrNombre='"+u.usrNombre+"', @usrName='"+u.usrName+"', @usrPassword='"+u.usrPassword+"', @usrRandom='"+u.usrRandom+"', @FechaAsignacion='"+u.fechaAsignacion+"',@ClaveMesa="+u.claveMesa+", @RolClave="+u.usrRol
     executeQuery(res, query);
   },
   deleteUsuario:function(req,res){
