@@ -12,35 +12,35 @@ var config = {
 };
 var sql=require('mssql');
 
-const tableN = "[dbo].[StatusDemanda]";
+const tableN = "[dbo].[StatusDemandas]";
 
 var statusDemanda={
 
   addStatusDemanda:function(req, res){
     console.log('AddStatusDemanda');
     let s = req.body;
-    var query = "insert into "+tableN+" values("+s.SDClave+","+s.SDClaveDem+","+s.SDClaveSta+","+s.SDClaveUsr+",'" +s.SDTimestamp+"','"+s.SDFechaCambio+"','"+s.SDComentarios+"')";
+    var query = "insert into "+tableN+" (SDClaveDem, SDClaveSta, SDClaveUsr , SDTimestamp) values ("+s.SDClaveDem+","+s.SDClaveSta+","+s.SDClaveUsr+",'" +s.SDTimestamp+"')"
     executeQuery(res, query);
   },
   updateStatusDemanda:function(req, res){
     console.log('UpdateStatusDemanda');
     let s = req.body;
-    var query = "update "+tableN+" set SDClaveDem="+s.SDClaveDem+",SDClaveSta="+s.SDClaveSta+",SDClaveUsr="+s.SDClaveUsr+",SDTimestamp="+s.SDTimestamp+",SDFechaCambio="+s.SDFechaCambio+",SDComentarios="+s.SDComentarios+" where SDClave = "+req.params.id;
-    executeQuery(res, query);
+    var query = "update "+tableN+" set SDClaveUsr="+s.SDClaveUsr+",SDFechaCambio='"+s.SDFechaCambio+"' where SDClaveDem = "+req.params.id+" AND SDFechaCambio IS NULL";
+    executeQuery(res, query, req);
   },
 
 }
 
-var executeQuery = function(res, query){
+var executeQuery = function(res, query, req){
   console.log(query);
 
   new sql.ConnectionPool(config).connect().then(pool => {
   return pool.request().query(query)
   }).then(result => {
-    return true;
+    res.status(200).send({message: "Success"});
     sql.close();
   }).catch(err => {
-    return false
+    res.status(500).send({ message: ""+err});
     sql.close();
   });
 }

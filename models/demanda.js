@@ -29,7 +29,7 @@ var demanda={
       console.log('AddDemanda');
       let d = req.body;
       console.log(d);
-      var query = "insert into "+tableN+" values("+d.DemClave+",'"+d.DemFolio+"','"+d.DemClaveActor+"','"+d.DemClaveDemandado+"','"+d.DemCiudad+"','"+d.DemFecha+"','"+d.DemTipo+"')";
+      var query = "insert into "+tableN+" values("+d.DemClave+",'"+d.DemFolio+"',"+d.DemClaveActor+","+d.DemClaveDemandado+",'"+d.DemCiudad+"','"+d.DemFecha+"','"+d.DemTipo+"')";
       console.log(query);
       executeQuery(res, query);
     },
