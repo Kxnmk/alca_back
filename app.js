@@ -16,6 +16,8 @@ var demandas = require('./routes/demandas');
 var comisiones = require('./routes/comisiones');
 var demandados = require('./routes/demandados');
 var statusR = require('./routes/statusRoles');
+var status = require('./routes/statusv');
+var statusDemanda = require('./routes/statusDemandas');
 
 
 var app = express();
@@ -51,6 +53,8 @@ app.use('/api/demandas', demandas);
 app.use('/api/comisiones', comisiones);
 app.use('/api/demandados', demandados);
 app.use('/api/statusRol', statusR);
+app.use('/api/status',status);
+app.use('/api/statusD', statusDemanda);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

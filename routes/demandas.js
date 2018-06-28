@@ -5,7 +5,7 @@ var A=require('../models/demanda');
 
 router.get('/:id?',function(req,res,next){
   if(req.params.id){
-    A.getDemandaById(req, res);
+    A.getDemandaByRol(req, res);
   }
   else{
     A.getAllDemandas(req, res);

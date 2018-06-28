@@ -20,15 +20,15 @@ var demanda={
       var query = 'select * from '+tableN;
       executeQuery(res, query);
     },
-    getDemandaById:function(req, res){
-      console.log('DemandaById');
-      var query = 'select * from '+tableN+' where DemClave = '+req.params.id;
+    getDemandaByRol:function(req, res){
+      console.log('DemandaByRol');
+      var query = "EXEC uspDemandasPorRol @RolClave = "+req.params.id
       executeQuery(res, query);
     },
     addDemanda:function(req, res){
       console.log('AddDemanda');
       let d = req.body;
-      console.log(u);
+      console.log(d);
       var query = "insert into "+tableN+" values("+d.DemClave+",'"+d.DemFolio+"','"+d.DemClaveActor+"','"+d.DemClaveDemandado+"','"+d.DemCiudad+"','"+d.DemFecha+"','"+d.DemTipo+"')";
       console.log(query);
       executeQuery(res, query);
@@ -43,7 +43,7 @@ var demanda={
         console.log('UpdateDemanda');
         let d = req.body;
         console.log(req.body);
-        var query = "update "+tableN+" set DemFolio='"+d.DemFolio+"',DemClaveActor='"+d.DemClaveActor+"',DemClaveDemandado='"+d.DemClaveDemandado+"', DemCiudad='"+d.DemCiudad+"', DemFecha='"+d.DemFecha+"', DemFecha='"+d.DemFecha+"' where ActClave = "+req.params.id;
+        var query = "update "+tableN+" set DemFolio='"+d.DemFolio+"',DemClaveActor="+d.DemClaveActor+",DemClaveDemandado="+d.DemClaveDemandado+", DemCiudad='"+d.DemCiudad+"', DemFecha='"+d.DemFecha+"' where DemClave = "+req.params.id;
         console.log(query);
         executeQuery(res, query);
       },
