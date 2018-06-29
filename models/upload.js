@@ -18,7 +18,7 @@ const tableN = "[dbo].[Documentos]";
 var upload={
     uploadFile:function(req, res){
       var form = new IncomingForm();
-      //form.uploadDir = "/Users/gabriellopez/Desktop/documentos_upload";
+      form.uploadDir = "/documentos";
       form.keepExtensions = true;
       form.encoding = 'utf-8';
 
