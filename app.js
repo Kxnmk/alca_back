@@ -19,8 +19,20 @@ var statusR = require('./routes/statusRoles');
 var status = require('./routes/statusv');
 var statusDemanda = require('./routes/statusDemandas');
 
+var upload = require('./routes/uploads');
+
+const cors = require('cors');
+
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200
+};
+
 
 var app = express();
+
+// Cross
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,6 +67,8 @@ app.use('/api/demandados', demandados);
 app.use('/api/statusRol', statusR);
 app.use('/api/status',status);
 app.use('/api/statusD', statusDemanda);
+
+app.use('/api/upload', upload);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
