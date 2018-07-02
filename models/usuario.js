@@ -38,7 +38,7 @@ var usuario={
   },
   deleteUsuario:function(req,res){
     console.log('deleteusuario');
-    var query = "delete from "+tableN+" where usrClave="+req.params.id;
+    var query = "EXEC uspBorrarUsuario @usrClave="+req.params.id;
     executeQuery(res, query);
   },
   updateUsuario:function(req, res){

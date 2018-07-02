@@ -1,21 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-var A=require('../models/comision');
+var A=require('../models/documento');
 
 router.get('/:id?',function(req,res,next){
   if(req.params.id){
-    A.getComisionById(req, res);
+    A.getDocumentosByDemanda(req, res);
   }
   else{
-    A.getAllComisiones(req, res);
+    res.status(500);
   }
 });
 
-router.post('/',function(req,res,next){
-  A.addComision(req, res);
+router.put('/:id',function(req,res,next){
+  A.updateDocumento(req, res);
 });
-
 
 
 module.exports=router;

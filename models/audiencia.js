@@ -20,16 +20,17 @@ var audiencia={
       var query = 'select * from '+tableN;
       executeQuery(res, query);
     },
-    getAudienciaById:function(req, res){
-      console.log('AudienciaById');
-      var query = 'select * from '+tableN+' where AudClave = '+req.params.id;
+    getAudienciaByRol:function(req, res){
+      console.log('AudienciaByRol');
+      //var query = 'select * from '+tableN+' where AudClave = '+req.params.id;
+      const d = new Date();
+      var query = "EXEC uspAudienciasPorRol @RolClave = "+req.params.id+", @Fecha = NULL";
       executeQuery(res, query);
     },
     addAudiencia:function(req, res){
       console.log('AddAudiencia');
       let a = req.body;
-      console.log(u);
-      var query = "insert into "+tableN+" values("+a.AudClave+",'"+a.AudFecha+"','"+a.AudHora+"','"+a.AudClaveMesa+"','"+a.AudClaveDemanda+"','"+a.AudNotas+"')";
+      var query = "insert INTO "+tableN+"([AudFecha], [AudHora], [AudClaveMesa], [AudClaveDemanda], [AudNotas]) VALUES ('"+a.AudFecha+"', '"+a.AudHora+"', "+a.AudClaveMesa+", "+a.AudClaveDemanda+", '"+a.AudNotas+"')";
       console.log(query);
       executeQuery(res, query);
     },
@@ -42,8 +43,7 @@ var audiencia={
     updateAudiencia:function(req, res){
         console.log('UpdateAudiencia');
         let a = req.body;
-        console.log(req.body);
-        var query = "update "+tableN+" set AudFecha='"+a.AudFecha+"',AudHora='"+a.AudHora+"',AudClaveMesa='"+a.AudClaveMesa+"', AudClaveDemanda='"+a.AudClaveDemanda+"', ActCorreo='"+a.AudNotas+"' where ActClave = "+req.params.id;
+        var query = "update "+tableN+" set AudFecha='"+a.AudFecha+"',AudHora='"+a.AudHora+"',AudClaveMesa="+a.AudClaveMesa+", AudClaveDemanda="+a.AudClaveDemanda+",AudNotas ='"+a.AudNotas+"' where AudClave = "+req.params.id;
         console.log(query);
         executeQuery(res, query);
       },

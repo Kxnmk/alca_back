@@ -4,12 +4,7 @@ var router = express.Router();
 var U=require('../models/upload');
 
 router.get('/:id?',function(req,res){
-  if(req.params.id){
-    U.getMesaById(req, res);
-  }
-  else{
-    U.getAllMesas(req, res);
-  }
+
 });
 
 router.post('/',function(req,res){

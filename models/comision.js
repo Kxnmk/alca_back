@@ -17,30 +17,22 @@ const tableN = "[dbo].[Comisiones]";
 var comision={
   getAllComisiones:function(req, res){
       console.log('AllComisiones');
-      var query = 'select * from '+tableN;
+      var query = "SELECT * from Comisiones INNER JOIN Usuarios ON Comisiones.ComClaveUsuario = Usuarios.usrClave INNER JOIN Roles on Comisiones.ComClaveRol = Roles.RolClave LEFT JOIN Mesas on Comisiones.ComClaveMesa = Mesas.MesClave WHERE Comisiones.ComFechaConclusion IS NULL"
       executeQuery(res, query);
     },
     getComisionById:function(req, res){
       console.log('ComisionById');
-      var query = 'select * from '+tableN+' where AudClave = '+req.params.id;
+      var query = 'select * from '+tableN+' where ComClave = '+req.params.id;
       executeQuery(res, query);
     },
     addComision:function(req, res){
       console.log('AddComision');
       let c = req.body;
-      console.log(u);
-      var query = "insert into "+tableN+" values("+c.ComClave+",'"+c.ComClaveMesa+"','"+c.ComClaveUsuario+"','"+c.ComFechaAsignacion+"','"+c.ComFechaConclusion+"','"+c.ComClaveRol+"')";
+
+      var query = "EXEC uspNuevaComision @usrClave="+c.ComClaveUsuario+", @comClaveMesa="+c.ComClaveMesa+", @comClaveRol="+c.ComClaveRol
       console.log(query);
       executeQuery(res, query);
-    },
-    updateComision:function(req, res){
-        console.log('UpdateComision');
-        let c = req.body;
-        console.log(req.body);
-        var query = "update "+tableN+" set ComClaveMesa='"+c.ComClaveMesa+"',ComClaveUsuario='"+c.ComClaveUsuario+"',ComFechaAsignacion='"+c.ComFechaAsignacion+"', ComFechaConclusion='"+c.ComFechaConclusion+"', ComClaveRol='"+c.ComClaveRol+"' where ComClave = "+req.params.id;
-        console.log(query);
-        executeQuery(res, query);
-      },
+    }
 }
 
 
