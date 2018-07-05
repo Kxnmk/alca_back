@@ -42,6 +42,7 @@ var upload={
       form.on('file', (field, file) => {
         //console.log(file.path);
         // Guardado en Base de datos
+        console.log(file.path);
         var d = new Date();
         var aux = file.name.split(".");
         var nmF = (aux[0]+d.getFullYear()+"_"+d.getUTCMonth()+"_"+d.getUTCDate()+"_"+d.getUTCMinutes()+"."+aux[1]);
