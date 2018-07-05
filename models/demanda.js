@@ -29,7 +29,7 @@ var demanda={
       console.log('AddDemanda');
       let d = req.body;
       console.log(d);
-      var query = "insert into "+tableN+" values("+d.DemClave+",'"+d.DemFolio+"',"+d.DemClaveActor+","+d.DemClaveDemandado+",'"+d.DemCiudad+"','"+d.DemFecha+"','"+d.DemTipo+"')";
+      var query = "INSERT INTO "+tableN+"([DemFolio], [DemClaveActor], [DemClaveDemandado], [DemCiudad], [DemFecha], [DemComentarios], [DemTipo], [DemClaveProyectista]) VALUES ('"+d.DemFolio+"', "+d.DemClaveActor+", "+d.DemClaveDemandado+", '"+d.DemCiudad+"', '"+d.DemFecha+"', '"+d.DemComentarios+"', '"+d.DemTipo+"', "+d.DemClaveProyectista+"); SELECT SCOPE_IDENTITY() as DemClave;"
       console.log(query);
       executeQuery(res, query);
     },
@@ -43,7 +43,7 @@ var demanda={
         console.log('UpdateDemanda');
         let d = req.body;
         console.log(req.body);
-        var query = "update "+tableN+" set DemFolio='"+d.DemFolio+"',DemClaveActor="+d.DemClaveActor+",DemClaveDemandado="+d.DemClaveDemandado+", DemCiudad='"+d.DemCiudad+"', DemFecha='"+d.DemFecha+"' where DemClave = "+req.params.id;
+        var query = "update "+tableN+" set DemFolio='"+d.DemFolio+"',DemClaveActor="+d.DemClaveActor+",DemClaveDemandado="+d.DemClaveDemandado+", DemCiudad='"+d.DemCiudad+"', DemFecha='"+d.DemFecha+"', DemComentarios='"+d.DemComentarios+"', DemClaveProyectista="+d.DemClaveProyectista+" where DemClave = "+req.params.id;
         console.log(query);
         executeQuery(res, query);
       },

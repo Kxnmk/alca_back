@@ -30,7 +30,10 @@ var upload={
         //console.log(obj);
         console.log('AddDocumento');
         let u = req.body;
-        var query = "INSERT INTO "+tableN+"([DocNombre], [DocTipo], [DocCantidadCopias], [DocDescripcion], [DocNotas], [DocClaveUsuarioCreado], [DocFechaCreacion], [DocClaveDemanda]) VALUES ('"+obj.DocNombre+"', '"+obj.DocTipo+"', "+obj.DocCantidadCopias+", '"+obj.DocDescripcion+"', '"+obj.DocNotas+"', "+obj.DocClaveUsuarioCreado+", '"+obj.DocFechaCreacion+"', "+obj.DocClaveDemanda+")";
+        var d = new Date();
+        var aux = obj.DocNombre.split(".");
+        var nmF = (aux[0]+d.getFullYear()+"_"+d.getUTCMonth()+"_"+d.getUTCDate()+"_"+d.getUTCMinutes()+"."+aux[1]);
+        var query = "INSERT INTO "+tableN+"([DocNombre], [DocTipo], [DocCantidadCopias], [DocDescripcion], [DocNotas], [DocClaveUsuarioCreado], [DocFechaCreacion], [DocClaveDemanda]) VALUES ('"+nmF+"', '"+obj.DocTipo+"', "+obj.DocCantidadCopias+", '"+obj.DocDescripcion+"', '"+obj.DocNotas+"', "+obj.DocClaveUsuarioCreado+", '"+obj.DocFechaCreacion+"', "+obj.DocClaveDemanda+")";
 
         executeQuery(res, query);
 
@@ -39,7 +42,11 @@ var upload={
       form.on('file', (field, file) => {
         //console.log(file.path);
         // Guardado en Base de datos
-        var query = "UPDATE [dbo].[Documentos] SET [DocHash] = '"+file.hash+"', [DocRuta] = '"+file.path+"' WHERE [DocNombre] = '" + file.name+"'";
+        var d = new Date();
+        var aux = file.name.split(".");
+        var nmF = (aux[0]+d.getFullYear()+"_"+d.getUTCMonth()+"_"+d.getUTCDate()+"_"+d.getUTCMinutes()+"."+aux[1]);
+
+        var query = "UPDATE [dbo].[Documentos] SET [DocHash] = '"+file.hash+"', [DocRuta] = '"+file.path+"' WHERE [DocNombre] = '" + nmF+"'";
         executeQuery(res, query);
       });
 

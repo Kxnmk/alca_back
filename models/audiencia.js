@@ -17,7 +17,7 @@ const tableN = "[dbo].[Audiencias]";
 var audiencia={
   getAllAudiencias:function(req, res){
       console.log('AllAudiencias');
-      var query = 'select * from '+tableN;
+      var query = "SELECT * FROM Audiencias INNER JOIN Demandas ON Audiencias.AudClaveDemanda = Demandas.DemClave INNER JOIN Mesas ON Audiencias.AudClaveMesa = Mesas.MesClave ORDER BY Audiencias.AudHora ASC"; 
       executeQuery(res, query);
     },
     getAudienciaByRol:function(req, res){

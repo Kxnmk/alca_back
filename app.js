@@ -18,6 +18,7 @@ var demandados = require('./routes/demandados');
 var statusR = require('./routes/statusRoles');
 var status = require('./routes/statusv');
 var statusDemanda = require('./routes/statusDemandas');
+var proyectista = require('./routes/proyectistas');
 
 var upload = require('./routes/uploads');
 var documento = require('./routes/documentos');
@@ -71,6 +72,7 @@ app.use('/api/statusD', statusDemanda);
 
 app.use('/api/upload', upload);
 app.use('/api/documentos', documento);
+app.use('/api/proyectistas', proyectista);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
