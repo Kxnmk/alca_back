@@ -1,4 +1,5 @@
 const IncomingForm = require('formidable').IncomingForm;
+
 var config = {
   user: 'Kxnmk_SQLLogin_1',
   password: 'wrzrj1lgme',
@@ -12,16 +13,21 @@ var config = {
   }
 };
 var sql=require('mssql');
+var fs = require('fs');
 
 const tableN = "[dbo].[Documentos]";
 var file;
 
 var upload={
 
+    openFile:function(req, res){
+      var docName = "uploads/"+req.params.id;
+      res.download(docName);
+    },
     uploadFile:function(req, res){
       var form = new IncomingForm();
 
-      //form.uploadDir = "/Users/gabriellopez/Desktop/documentos_upload";
+      form.uploadDir = "./uploads";
       form.keepExtensions = true;
       form.encoding = 'utf-8';
       form.hash = 'md5';
@@ -42,12 +48,13 @@ var upload={
       form.on('file', (field, file) => {
         //console.log(file.path);
         // Guardado en Base de datos
-        console.log(file.path);
         var d = new Date();
         var aux = file.name.split(".");
         var nmF = (aux[0]+d.getFullYear()+"_"+d.getUTCMonth()+"_"+d.getUTCDate()+"_"+d.getUTCMinutes()+"."+aux[1]);
 
-        var query = "UPDATE [dbo].[Documentos] SET [DocHash] = '"+file.hash+"', [DocRuta] = '"+file.path+"' WHERE [DocNombre] = '" + nmF+"'";
+        var pt = file.path.split("/");
+
+        var query = "UPDATE [dbo].[Documentos] SET [DocHash] = '"+file.hash+"', [DocRuta] = '"+pt[1]+"' WHERE [DocNombre] = '" + nmF+"'";
         executeQuery(res, query);
       });
 
