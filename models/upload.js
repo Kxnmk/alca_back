@@ -16,7 +16,7 @@ var sql=require('mssql');
 var fs = require('fs');
 
 const tableN = "[dbo].[Documentos]";
-var file;
+var data;
 
 var upload={
 
@@ -31,35 +31,13 @@ var upload={
       form.keepExtensions = true;
       form.encoding = 'utf-8';
       form.hash = 'md5';
+      form.on('file', (field, file) => {
+        savefile(req, res, file);
+      });
       form.on('field', function(name, value) {
         var obj = JSON.parse(value);
-        //console.log(obj);
-        console.log('AddDocumento');
-        let u = req.body;
-        var d = new Date();
-        var aux = obj.DocNombre.split(".");
-        var nmF = (aux[0]+d.getFullYear()+"_"+d.getUTCMonth()+"_"+d.getUTCDate()+"_"+d.getUTCMinutes()+"."+aux[1]);
-        var query = "INSERT INTO "+tableN+"([DocNombre], [DocTipo], [DocCantidadCopias], [DocDescripcion], [DocNotas], [DocClaveUsuarioCreado], [DocFechaCreacion], [DocClaveDemanda]) VALUES ('"+nmF+"', '"+obj.DocTipo+"', "+obj.DocCantidadCopias+", '"+obj.DocDescripcion+"', '"+obj.DocNotas+"', "+obj.DocClaveUsuarioCreado+", '"+obj.DocFechaCreacion+"', "+obj.DocClaveDemanda+")";
-
-        executeQuery(res, query);
-
-
+        tmpD(obj);
       });
-      form.on('file', (field, file) => {
-        //console.log(file.path);
-        // Guardado en Base de datos
-        var d = new Date();
-        var aux = file.name.split(".");
-        var nmF = (aux[0]+d.getFullYear()+"_"+d.getUTCMonth()+"_"+d.getUTCDate()+"_"+d.getUTCMinutes()+"."+aux[1]);
-
-        var pt = file.path.split("/");
-
-        var query = "UPDATE [dbo].[Documentos] SET [DocHash] = '"+file.hash+"', [DocRuta] = '"+pt[1]+"' WHERE [DocNombre] = '" + nmF+"'";
-        executeQuery(res, query);
-      });
-
-
-
 
       form.on('end', () => {
         res.json();
@@ -69,6 +47,26 @@ var upload={
 
     }
 
+
+}
+
+var tmpD = function (data){
+  this.data = data;
+}
+
+var savefile = function (req, res, file) {
+  console.log(file);
+  console.log(this.data);
+  console.log('AddDocumento');
+  var obj = this.data;
+  let u = req.body;
+  var d = new Date();
+  var aux = obj.DocNombre.split(".");
+  var pt = file.path.split("/");
+  var nmF = (aux[0]+d.getFullYear()+"_"+d.getUTCMonth()+"_"+d.getUTCDate()+"_"+d.getUTCMinutes()+d.getUTCSeconds()+"."+aux[1]);
+  var query = "INSERT INTO "+tableN+"([DocNombre], [DocTipo], [DocCantidadCopias], [DocDescripcion], [DocNotas], [DocClaveUsuarioCreado], [DocFechaCreacion], [DocClaveDemanda], [DocHash], [DocRuta]) VALUES ('"+nmF+"', '"+obj.DocTipo+"', "+obj.DocCantidadCopias+", '"+obj.DocDescripcion+"', '"+obj.DocNotas+"', "+obj.DocClaveUsuarioCreado+", '"+obj.DocFechaCreacion+"', "+obj.DocClaveDemanda+", '"+file.hash+"', '"+pt[1]+"')";
+
+  executeQuery(res, query);
 
 }
 
